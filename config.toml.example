@@ -1,0 +1,24 @@
+datadir = "/root/.arcium"
+network  = "testnet"
+identity = "/root/.arcium/identity.key"
+moniker  = "carlys-arcium"
+
+[cluster]
+registry     = "0x1234567890AbcdEF1234567890aBcdef12345678"
+listen        = "0.0.0.0:9000"
+seeds = [
+  "seed-1.testnet.arcium.com:9000",
+  "seed-2.testnet.arcium.com:9000",
+]
+
+[rpc]
+listen   = "127.0.0.1:9001"
+user     = "arx"
+password = "CHANGE_ME"
+
+[telemetry]
+prometheus_listen = "127.0.0.1:9102"
+
+[log]
+level = "info"
+file  = "/var/log/arcium.log"

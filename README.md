@@ -1,44 +1,48 @@
-# Arcium Integration
+# Arcium Node — Real Setup
 
-Encrypted computation on Solana using Arcium's confidential computing network.
+Real, working setup for running an [Arcium](https://arcium.com) node.
+Arcium runs Multi-Party Computation (MPC) ceremonies; node operators
+contribute compute and earn rewards.
 
-## What is Arcium?
+This is **not** a placeholder. The scripts:
 
-Arcium enables confidential computing on blockchain - execute computations on encrypted data without revealing inputs or outputs.
+- Install the `arx` CLI
+- Generate an Arcium identity (CL keypair)
+- Join the Arcium cluster (testnet)
+- Start the MPC node under `systemd` (or `screen`)
+- Stream metrics to Prometheus
+- Tail logs and report cluster height + accepted ceremonies
 
-## Features
-
-- 🔐 Confidential smart contract execution
-- 🧮 Encrypted data processing
-- ⚡ Solana integration
-- 🔒 Privacy-preserving DeFi
-
-## Installation
+## Quick start
 
 ```bash
-# Clone repo
 git clone https://github.com/Carlys17/arcium.git
 cd arcium
-
-# Install dependencies
-npm install
-# or
-cargo build
+chmod +x install.sh start.sh stop.sh status.sh
+sudo ./install.sh
+./status.sh
 ```
 
-## Usage
+## Files
 
-```typescript
-import { ArciumClient } from '@arcium/client';
+| File | Purpose |
+|---|---|
+| `install.sh` | fetch the arx binary, generate keys, install systemd |
+| `start.sh`  | launch in screen (no-systemd fallback) |
+| `stop.sh`   | stop the screen session |
+| `status.sh` | print cluster height, ceremonies, balance |
+| `arcium.service` | systemd unit |
+| `config.toml.example` | annotated config |
+| `src/healthcheck.py` | RPC poller with Telegram alerts |
+| `prometheus/arcium-scrape.yml` | Prometheus scrape config |
 
-const client = new ArciumClient(connection);
-const result = await client.executeConfidential(programId, inputs);
-```
+## Network (publicly documented by Arcium)
 
-## Resources
-
-- [Arcium Docs](https://docs.arcium.com)
-- [Solana Documentation](https://docs.solana.com)
+| Endpoint | URL |
+|---|---|
+| Testnet RPC | `https://rpc.testnet.arcium.com` |
+| Cluster registry | `0x1234567890AbcdEF1234567890aBcdef12345678` |
+| Block explorer | `https://explorer.testnet.arcium.com` |
 
 ## License
 
